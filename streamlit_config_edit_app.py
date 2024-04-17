@@ -6,13 +6,8 @@ import pandas as pd
 
 # Write directly to the app
 st.title("Config tables editor :lab_coat:")
-st.write(
-    """Choose the table you want to edit.
-    """
-)
 
 name_on_order = st.text_input('Choose the table you want to edit')
-#st.write('The name on your Smoothie will be:', name_on_order)
 
 cnx = st.connection("snowflake")
 session = cnx.session()
