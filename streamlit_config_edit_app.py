@@ -42,7 +42,7 @@ def main():
         try:
             #Note the quote_identifiers argument for case insensitivity
             st.dataframe(edited)
-            session.write_pandas(edited, selected_table, auto_create_table = True, overwrite=True, quote_identifiers=False)
+            session.write_pandas(edited, selected_table, overwrite=True, quote_identifiers=False)
             st.success("Table updated")
             #time.sleep(5)
         except:
