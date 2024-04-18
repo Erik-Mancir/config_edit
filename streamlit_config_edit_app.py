@@ -33,10 +33,10 @@ def main():
     
     # Display dataframe
     #st.data_editor(df, num_rows='dynamic')
-
-    st.caption("Edit the dataframe below")
-    edited = st.data_editor(df, use_container_width=True, num_rows="dynamic")
-    submit_button = st.form_submit_button("Submit")
+    with st.form("data_editor_form"):
+        st.caption("Edit the dataframe below")
+        edited = st.data_editor(df, use_container_width=True, num_rows="dynamic")
+        submit_button = st.form_submit_button("Submit")
 
     if submit_button:
         try:
