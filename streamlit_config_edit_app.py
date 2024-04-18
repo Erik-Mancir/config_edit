@@ -28,7 +28,7 @@ def main():
     cursor = cnx.cursor()
     cursor.execute(f"SELECT * FROM {selected_table}")
     data = cursor.fetchall()
-    st.dataframe(df)
+    st.dataframe(data)
     #df = pd.DataFrame(data, columns=[desc[0] for desc in cursor.description])
     
     # Display dataframe
