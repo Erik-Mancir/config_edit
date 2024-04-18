@@ -32,8 +32,23 @@ def main():
     df = pd.DataFrame(data, columns=[desc[0] for desc in cursor.description])
     
     # Display dataframe
-    st.data_editor(df, num_rows='dynamic')
+    #st.data_editor(df, num_rows='dynamic')
 
+    with st.form("data_editor_form"):
+    st.caption("Edit the dataframe below")
+    edited = st.experimental_data_editor(df, use_container_width=True, num_rows="dynamic")
+    submit_button = st.form_submit_button("Submit")
+
+    if submit_button:
+        try:
+            #Note the quote_identifiers argument for case insensitivity
+            session.write_pandas(edited, selected_table, overwrite=True, quote_identifiers=False)
+            st.success("Table updated")
+            time.sleep(5)
+        except:
+            st.warning("Error updating table")
+        #display success message for 5 seconds and update the table to reflect what is in Snowflake
+        st.experimental_rerun()
 # Run the Streamlit app
-if __name__ == "__main__":
-    main()
+#if __name__ == "__main__":
+#    main()
