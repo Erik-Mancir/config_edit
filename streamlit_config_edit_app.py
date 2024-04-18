@@ -22,7 +22,7 @@ def main():
     tables = get_tables()
     
     # Let user select a table
-    #selected_table = st.selectbox("Select a table", tables)
+    selected_table = st.selectbox("Select a table", tables)
     
     # Fetch data from selected table
     #cursor = cnx.cursor()
