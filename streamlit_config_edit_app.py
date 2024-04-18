@@ -35,14 +35,14 @@ def main():
     #st.data_editor(df, num_rows='dynamic')
     with st.form("data_editor_form"):
         st.caption("Edit the dataframe below")
-        edited = st.data_editor(df, use_container_width=True, num_rows="dynamic")
+        edited = st.data_editor(df, use_container_width=True, num_rows="dynamic") 
         submit_button = st.form_submit_button("Submit")
 
     if submit_button:
         try:
             #Note the quote_identifiers argument for case insensitivity
             st.dataframe(edited)
-            session.write_pandas(edited, selected_table, overwrite=True, quote_identifiers=False)
+            session.write_pandas(edited, selected_table, overwrite=True, auto_create_table=True, quote_identifiers=False)#auto_create_table=True
             st.success("Table updated")
             #time.sleep(5)
         except:
