@@ -41,9 +41,10 @@ def main():
     if submit_button:
         try:
             #Note the quote_identifiers argument for case insensitivity
-            session.write_pandas(edited, selected_table, overwrite=True, quote_identifiers=False)
-            st.success("Table updated")
-            time.sleep(5)
+            st.dataframe(edited)
+            #session.write_pandas(edited, selected_table, overwrite=True, quote_identifiers=False)
+            #st.success("Table updated")
+            #time.sleep(5)
         except:
             st.warning("Error updating table")
         #display success message for 5 seconds and update the table to reflect what is in Snowflake
