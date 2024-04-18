@@ -25,9 +25,10 @@ def main():
     selected_table = st.selectbox("Select a table", tables)
     
     # Fetch data from selected table
-    #cursor = cnx.cursor()
-    #cursor.execute(f"SELECT * FROM {selected_table}")
-    #data = cursor.fetchall()
+    cursor = cnx.cursor()
+    cursor.execute(f"SELECT * FROM {selected_table}")
+    data = cursor.fetchall()
+    st.dataframe(df)
     #df = pd.DataFrame(data, columns=[desc[0] for desc in cursor.description])
     
     # Display dataframe
