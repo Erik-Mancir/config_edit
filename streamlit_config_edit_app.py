@@ -19,7 +19,7 @@ def main():
     st.title("Config Table Editor :lab_coat:")
     
     # Fetch tables from Snowflake
-    #tables = get_tables()
+    tables = get_tables()
     
     # Let user select a table
     #selected_table = st.selectbox("Select a table", tables)
