@@ -32,7 +32,7 @@ def main():
     df = pd.DataFrame(data, columns=[desc[0] for desc in cursor.description])
     
     # Display dataframe
-    st.dataframe(df)
+    st.experimental_data_editor(df)
 
 # Run the Streamlit app
 if __name__ == "__main__":
