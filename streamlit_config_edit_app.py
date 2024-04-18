@@ -14,7 +14,7 @@ session = cnx.session()
 
 # Function to fetch tables from Snowflake
 def get_tables():
-    cursor = conn.cursor()
+    cursor = cnx.cursor()
     cursor.execute("SHOW TABLES")
     tables = [table[1] for table in cursor.fetchall()]
     return tables
@@ -30,7 +30,7 @@ def main():
     selected_table = st.selectbox("Select a table", tables)
     
     # Fetch data from selected table
-    cursor = conn.cursor()
+    cursor = cnx.cursor()
     cursor.execute(f"SELECT * FROM {selected_table}")
     data = cursor.fetchall()
     df = pd.DataFrame(data, columns=[desc[0] for desc in cursor.description])
