@@ -48,7 +48,7 @@ def main():
         except:
             st.warning("Error updating table")
         #display success message for 5 seconds and update the table to reflect what is in Snowflake
-        st.experimental_rerun()
+        #st.experimental_rerun()
 # Run the Streamlit app
 if __name__ == "__main__":
     main()
