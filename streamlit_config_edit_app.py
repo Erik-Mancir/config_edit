@@ -49,5 +49,5 @@ def main():
         #display success message for 5 seconds and update the table to reflect what is in Snowflake
         st.experimental_rerun()
 # Run the Streamlit app
-#if __name__ == "__main__":
-#    main()
+if __name__ == "__main__":
+    main()
