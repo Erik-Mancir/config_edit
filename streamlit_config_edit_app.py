@@ -4,11 +4,6 @@ from snowflake.snowpark.functions import col
 import requests
 import pandas as pd
 
-# Write directly to the app
-st.title("Config tables editor :lab_coat:")
-
-table_edit = st.text_input('Choose the table you want to edit')
-
 cnx = st.connection("snowflake")
 session = cnx.session()
 
@@ -21,7 +16,7 @@ def get_tables():
 
 # Streamlit app
 def main():
-    st.title("Snowflake Table Editor")
+    st.title("Config Table Editor :lab_coat:")
     
     # Fetch tables from Snowflake
     tables = get_tables()
