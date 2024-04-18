@@ -19,19 +19,19 @@ def main():
     st.title("Config Table Editor :lab_coat:")
     
     # Fetch tables from Snowflake
-    tables = get_tables()
+    #tables = get_tables()
     
     # Let user select a table
-    selected_table = st.selectbox("Select a table", tables)
+    #selected_table = st.selectbox("Select a table", tables)
     
     # Fetch data from selected table
-    cursor = cnx.cursor()
-    cursor.execute(f"SELECT * FROM {selected_table}")
-    data = cursor.fetchall()
-    df = pd.DataFrame(data, columns=[desc[0] for desc in cursor.description])
+    #cursor = cnx.cursor()
+    #cursor.execute(f"SELECT * FROM {selected_table}")
+    #data = cursor.fetchall()
+    #df = pd.DataFrame(data, columns=[desc[0] for desc in cursor.description])
     
     # Display dataframe
-    st.dataframe(df)
+    #Dst.dataframe(df)
 
 # Run the Streamlit app
 if __name__ == "__main__":
