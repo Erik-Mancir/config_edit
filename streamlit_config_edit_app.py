@@ -28,11 +28,11 @@ def main():
     cursor = cnx.cursor()
     cursor.execute(f"SELECT * FROM {selected_table}")
     data = cursor.fetchall()
-    st.dataframe(data)
-    #df = pd.DataFrame(data, columns=[desc[0] for desc in cursor.description])
+    #st.dataframe(data)
+    df = pd.DataFrame(data, columns=[desc[0] for desc in cursor.description])
     
     # Display dataframe
-    #Dst.dataframe(df)
+    st.dataframe(df)
 
 # Run the Streamlit app
 if __name__ == "__main__":
