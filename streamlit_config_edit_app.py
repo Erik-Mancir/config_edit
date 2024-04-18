@@ -16,7 +16,7 @@ def get_tables():
 
 # Streamlit app
 def main():
-    st.title("Config Table Editor :lab_coat:")
+    st.title("Config Table Editor")
     
     # Fetch tables from Snowflake
     tables = get_tables()
