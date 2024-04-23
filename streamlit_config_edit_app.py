@@ -65,7 +65,7 @@ def main():
         #st.dataframe(data)
         df = pd.DataFrame(data, columns=[desc[0] for desc in cursor.description])
 
-        st.dataframe(df)
+        st.dataframe(df, use_container_width=True)
                     #st.experimental_rerun()
 # Run the Streamlit app
 if __name__ == "__main__":
