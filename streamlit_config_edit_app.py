@@ -19,6 +19,7 @@ def main():
 
     tabs = st.tabs(["Editor", "Form", "View logs"])
 
+    # Editing the table using the Streamlit Data Editor
     with tabs[0]:
         st.title("Config Table Editor")
         # Fetch tables from Snowflake
@@ -52,9 +53,9 @@ def main():
                 st.warning("Error updating table")
     
     with tabs[1]:
-        st.form()
-            #display success message for 5 seconds and update the table to reflect what is in Snowflake
-            #st.experimental_rerun()
+        st.title("Config Table Form")
+        
+                    #st.experimental_rerun()
 # Run the Streamlit app
 if __name__ == "__main__":
     main()
