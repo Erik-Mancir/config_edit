@@ -19,10 +19,8 @@ def main():
 
     tabs = st.tabs(["Editor", "View logs"])
 
-    st.title("Config Table Editor")
-    
     with tabs[0]:
-
+        st.title("Config Table Editor")
         # Fetch tables from Snowflake
         tables = get_tables()
         
