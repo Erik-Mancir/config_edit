@@ -14,6 +14,33 @@ def get_tables():
     tables = [table[1] for table in cursor.fetchall()]
     return tables
 
+@st.cache(allow_output_mutation=True)  # Cache edited data while allowing updates
+def edit_row(index, original_df):
+    """
+    Creates a form for editing a specific row in the DataFrame.
+
+    Args:
+        index (int): The index of the row to edit.
+        original_df (pd.DataFrame): The original DataFrame.
+
+    Returns:
+        pd.DataFrame: The updated DataFrame if changes were made, or None otherwise.
+    """
+
+    row_data = original_df.iloc[index].to_dict()  # Get row data for pre-filling
+
+    form = st.form(key=f"edit_form_{index}")  # Unique key per form
+    name = form.text_input(label="Name", value=row_data["Name"])
+    role = form.text_input(label="Role", value=row_data["Role"])
+    submit = form.form_submit_button(label="Save")
+
+    if submit:
+        updated_df = original_df.copy()  # Avoid modifying original DataFrame
+        updated_df.iloc[index] = {"Name": name, "Role": role}
+        return updated_df
+    else:
+        return None
+
 # Streamlit app
 def main():
 
@@ -66,7 +93,31 @@ def main():
         df = pd.DataFrame(data, columns=[desc[0] for desc in cursor.description])
 
         st.dataframe(df, use_container_width=True)
-                    #st.experimental_rerun()
+
+        selected_index = None  # Store the index of the clicked row
+
+        for index, row in df.iterrows():
+            # Display row data
+            st.write(row)
+
+            # Create a button for each row
+            if st.button(f"Edit Row {index+1}", key=f"edit_button_{index}"):
+                selected_index = index
+
+        # Check if a button was clicked and call the edit_row function
+        if selected_index is not None:
+            updated_df = edit_row(selected_index, df.copy())  # Pass a copy
+
+            # Update the DataFrame if changes were made
+            if updated_df is not None:
+                df = updated_df
+                st.write("Successfully updated data!")
+            else:
+                st.write("No changes made.")
+
+        # Display the updated DataFrame
+        st.write(df)
+                            #st.experimental_rerun()
 # Run the Streamlit app
 if __name__ == "__main__":
     main()
