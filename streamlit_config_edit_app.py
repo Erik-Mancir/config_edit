@@ -30,7 +30,7 @@ def edit_row(index, original_df):
     row_data = original_df.iloc[index].to_dict()  # Get row data for pre-filling
 
     form = st.form(key=f"edit_form_{index}")  # Unique key per form
-    name = form.text_input(label="Name", value=row_data["Name"])
+    name = form.text_input(label="Name", value=row_data["ACCOUNT_NAME"])
     role = form.text_input(label="Role", value=row_data["Role"])
     submit = form.form_submit_button(label="Save")
 
