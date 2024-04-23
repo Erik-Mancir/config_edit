@@ -55,12 +55,12 @@ def main():
     with tabs[1]:
         st.title("Config Table Form")
 
-        tables = get_tables()
+        tables_form = get_tables()
         # Let user select a table
-        selected_table = st.selectbox("Select a table", tables)
+        selected_table_form = st.selectbox("Select a table", tables_form)
         # Fetch data from selected table
         cursor = cnx.cursor()
-        cursor.execute(f"SELECT * FROM {selected_table}")
+        cursor.execute(f"SELECT * FROM {selected_table_form}")
         data = cursor.fetchall()
         #st.dataframe(data)
         df = pd.DataFrame(data, columns=[desc[0] for desc in cursor.description])
