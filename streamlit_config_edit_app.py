@@ -54,7 +54,18 @@ def main():
     
     with tabs[1]:
         st.title("Config Table Form")
-        
+
+        tables = get_tables()
+        # Let user select a table
+        selected_table = st.selectbox("Select a table", tables)
+        # Fetch data from selected table
+        cursor = cnx.cursor()
+        cursor.execute(f"SELECT * FROM {selected_table}")
+        data = cursor.fetchall()
+        #st.dataframe(data)
+        df = pd.DataFrame(data, columns=[desc[0] for desc in cursor.description])
+
+        st.dataframe(df)
                     #st.experimental_rerun()
 # Run the Streamlit app
 if __name__ == "__main__":
