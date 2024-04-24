@@ -53,7 +53,7 @@ def main():
         tables = get_tables()
         
         # Let user select a table
-        selected_table = st.selectbox("Select a table", tables, key=1)
+        selected_table = st.selectbox("Select a table", tables, key="Select_for_Data_Editor")
         
         # Fetch data from selected table
         cursor = cnx.cursor()
@@ -85,7 +85,7 @@ def main():
 
         tables_form = get_tables()
         # Let user select a table
-        selected_table_form = st.selectbox("Select a table", tables_form, key=2)
+        selected_table_form = st.selectbox("Select a table", tables_form, key="Select_for_Form")
         # Fetch data from selected table
         cursor = cnx.cursor()
         cursor.execute(f"SELECT * FROM {selected_table_form}")
@@ -100,6 +100,7 @@ def main():
 
         cursor.close()
         #st.dataframe(data)
+        '''
         df = pd.DataFrame(data, columns=[desc[0] for desc in cursor.description])
 
         form = st.form(key="data_form")
@@ -141,8 +142,9 @@ def main():
                 st.success("Data inserted successfully!")
             except Exception as e:
                 st.error(f"Error inserting data: {e}")
-            #finally:
-                #cursor.close()  # Always close the cursor
+            finally:
+                cursor.close()  # Always close the cursor
+            '''
 # Run the Streamlit app
 if __name__ == "__main__":
     main()
