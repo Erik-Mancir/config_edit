@@ -106,7 +106,7 @@ def main():
 
         # Form fields using appropriate Streamlit widgets (e.g., text_input, number_input)
         name = form.text_input(label="Name")
-        role = form.number_input(label="Role")
+        role = form.text_input(label="Role")
         settings = form.text_input(label="Account Settings")
         # ... Add more fields as needed based on your table columns
 
