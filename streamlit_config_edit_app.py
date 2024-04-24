@@ -79,6 +79,7 @@ def main():
             except:
                 st.warning("Error updating table")
     
+    # Adding new value to the table
     with tabs[1]:
         st.title("Config Table Form")
 
@@ -92,32 +93,15 @@ def main():
         #st.dataframe(data)
         df = pd.DataFrame(data, columns=[desc[0] for desc in cursor.description])
 
-        st.dataframe(df, use_container_width=True)
+        form = st.form(key="data_form")
 
-        selected_index = None  # Store the index of the clicked row
+        # Form fields using appropriate Streamlit widgets (e.g., text_input, number_input)
+        name = form.text_input(label="Name")
+        age = form.number_input(label="Age")
+        # ... Add more fields as needed based on your table columns
 
-        for index, row in df.iterrows():
-            # Display row data
-            st.write(row)
+        submit_button = form.form_submit_button(label="Submit")
 
-            # Create a button for each row
-            if st.button(f"Edit Row {index+1}", key=f"edit_button_{index}"):
-                selected_index = index
-
-        # Check if a button was clicked and call the edit_row function
-        if selected_index is not None:
-            updated_df = edit_row(selected_index, df.copy())  # Pass a copy
-
-            # Update the DataFrame if changes were made
-            if updated_df is not None:
-                df = updated_df
-                st.write("Successfully updated data!")
-            else:
-                st.write("No changes made.")
-
-        # Display the updated DataFrame
-        st.write(df)
-                            #st.experimental_rerun()
 # Run the Streamlit app
 if __name__ == "__main__":
     main()
