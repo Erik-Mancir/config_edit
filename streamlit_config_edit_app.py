@@ -98,7 +98,7 @@ def main():
         cursor.execute(sql)
         sequence_value = cursor.fetchone()[0]
 
-        cursor.close()
+        #cursor.close()
         
         
         df = pd.DataFrame(data, columns=[desc[0] for desc in cursor.description])
