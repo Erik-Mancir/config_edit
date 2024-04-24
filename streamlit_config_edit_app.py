@@ -100,9 +100,10 @@ def main():
 
         cursor.close()
         #st.dataframe(data)
-        '''
+        
         df = pd.DataFrame(data, columns=[desc[0] for desc in cursor.description])
 
+        '''
         form = st.form(key="data_form")
 
         # Form fields using appropriate Streamlit widgets (e.g., text_input, number_input)
