@@ -13,34 +13,7 @@ def get_tables():
     cursor.execute("SHOW TABLES")
     tables = [table[1] for table in cursor.fetchall()]
     return tables
-'''
-@st.cache(allow_output_mutation=True)  # Cache edited data while allowing updates
-def edit_row(index, original_df):
-    """
-    Creates a form for editing a specific row in the DataFrame.
 
-    Args:
-        index (int): The index of the row to edit.
-        original_df (pd.DataFrame): The original DataFrame.
-
-    Returns:
-        pd.DataFrame: The updated DataFrame if changes were made, or None otherwise.
-    """
-
-    row_data = original_df.iloc[index].to_dict()  # Get row data for pre-filling
-
-    form = st.form(key=f"edit_form_{index}")  # Unique key per form
-    name = form.text_input(label="Name", value=row_data["ACCOUNT_NAME"])
-    role = form.text_input(label="Role", value=row_data["Role"])
-    submit = form.form_submit_button(label="Save")
-
-    if submit:
-        updated_df = original_df.copy()  # Avoid modifying original DataFrame
-        updated_df.iloc[index] = {"Name": name, "Role": role}
-        return updated_df
-    else:
-        return None
-'''
 # Streamlit app
 def main():
 
