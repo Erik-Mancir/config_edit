@@ -114,7 +114,7 @@ def main():
         submit_button = form.form_submit_button(label="Submit")
         if submit_button:
             # Prepare data for insertion
-            data = {
+            data_tuple = {
                 "CONFIG_ID":sequence_value,
                 "ACCOUNT_NAME": name,
                 "role": role,
@@ -128,7 +128,7 @@ def main():
             cursor = cnx.cursor()
             
             # Convert data dict to tuple for insertion
-            values = tuple(data.values())  
+            values = tuple(data_tuple.values())  
 
             # Execute the INSERT statement
             try:
