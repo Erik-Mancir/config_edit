@@ -90,6 +90,15 @@ def main():
         cursor = cnx.cursor()
         cursor.execute(f"SELECT * FROM {selected_table_form}")
         data = cursor.fetchall()
+
+        cursor = cnx.cursor()
+
+        # Replace "your_schema" and "your_sequence" with your actual names
+        sql = f"SELECT NEXTVAL('config.config_t_sequence')"
+        cursor.execute(sql)
+        sequence_value = cursor.fetchone()[0]
+
+        cursor.close()
         #st.dataframe(data)
         df = pd.DataFrame(data, columns=[desc[0] for desc in cursor.description])
 
@@ -97,11 +106,40 @@ def main():
 
         # Form fields using appropriate Streamlit widgets (e.g., text_input, number_input)
         name = form.text_input(label="Name")
-        age = form.number_input(label="Age")
+        role = form.number_input(label="Role")
+        settings = form.text_input(label="Account Settings")
         # ... Add more fields as needed based on your table columns
 
         submit_button = form.form_submit_button(label="Submit")
+        if submit_button:
+            # Prepare data for insertion
+            data = {
+                "CONFIG_ID":sequence_value,
+                "ACCOUNT_NAME": name,
+                "role": role,
+                "SETTINGS": settings,
 
+                # ... Add more key-value pairs for other columns
+            }
+
+            # Create cursor and build SQL INSERT statement
+            cursor = cnx.cursor()
+            sql = f"""
+                INSERT INTO config_t1 (CONFIG_ID, ACCOUNT_NAME, role, SETTINGS)
+                VALUES (%s, %s, %s, %s)
+            """
+            values = tuple(data.values())  # Convert data dict to tuple for insertion
+
+            # Execute the INSERT statement
+            try:
+                cursor.execute(sql, values)
+                cnx.commit()
+                st.success("Data inserted successfully!")
+            except Exception as e:
+                st.error(f"Error inserting data: {e}")
+                cnx.rollback()  # Rollback on errors
+            finally:
+                cursor.close()  # Always close the cursor
 # Run the Streamlit app
 if __name__ == "__main__":
     main()
