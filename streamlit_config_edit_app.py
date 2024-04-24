@@ -141,8 +141,8 @@ def main():
                 st.success("Data inserted successfully!")
             except Exception as e:
                 st.error(f"Error inserting data: {e}")
-            finally:
-                cursor.close()  # Always close the cursor
+            #finally:
+                #cursor.close()  # Always close the cursor
 # Run the Streamlit app
 if __name__ == "__main__":
     main()
