@@ -128,7 +128,7 @@ def main():
             cursor = cnx.cursor()
             
             # Convert data dict to tuple for insertion
-            values = tuple(data_tuple.values())  
+            #values = tuple(data_tuple.values())  
 
             # Execute the INSERT statement
             try:
@@ -136,7 +136,7 @@ def main():
                 cursor.execute("""
                     INSERT INTO config_t1 (CONFIG_ID, ACCOUNT_NAME, "role", SETTINGS, NOTES)
                     VALUES (?, ?, ?, ?, ?)
-                """, values)
+                """, (sequence_value,name,role,settings,notes))
                 cnx._instance.commit()
                 st.success("Data inserted successfully!")
             except Exception as e:
