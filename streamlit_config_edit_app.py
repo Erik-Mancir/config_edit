@@ -94,7 +94,7 @@ def main():
         cursor = cnx.cursor()
 
         # Replace "your_schema" and "your_sequence" with your actual names
-        sql = f"SELECT NEXTVAL('config.config_t_sequence')"
+        sql = f"SELECT NEXTVAL(config.config_t_sequence)"
         cursor.execute(sql)
         sequence_value = cursor.fetchone()[0]
 
