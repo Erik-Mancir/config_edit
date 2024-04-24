@@ -90,7 +90,7 @@ def main():
         cursor = cnx.cursor()
         cursor.execute(f"SELECT * FROM {selected_table_form}")
         data = cursor.fetchall()
-        
+
         df = pd.DataFrame(data, columns=[desc[0] for desc in cursor.description])
         st.dataframe(df)
 
@@ -101,11 +101,11 @@ def main():
         cursor.execute(sql)
         sequence_value = cursor.fetchone()[0]
 
-        #cursor.close()
+        cursor.close()
         
         
         
-        '''
+        
         form = st.form(key="data_form")
 
         # Form fields using appropriate Streamlit widgets (e.g., text_input, number_input)
@@ -147,7 +147,7 @@ def main():
                 st.error(f"Error inserting data: {e}")
             finally:
                 cursor.close()  # Always close the cursor
-            '''
+            
 # Run the Streamlit app
 if __name__ == "__main__":
     main()
