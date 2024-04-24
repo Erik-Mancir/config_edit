@@ -137,7 +137,7 @@ def main():
                 st.success("Data inserted successfully!")
             except Exception as e:
                 st.error(f"Error inserting data: {e}")
-                cnx.rollback()  # Rollback on errors
+                #cnx.rollback()  # Rollback on errors
             finally:
                 cursor.close()  # Always close the cursor
 # Run the Streamlit app
