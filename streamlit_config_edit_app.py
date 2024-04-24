@@ -13,7 +13,7 @@ def get_tables():
     cursor.execute("SHOW TABLES")
     tables = [table[1] for table in cursor.fetchall()]
     return tables
-
+'''
 @st.cache(allow_output_mutation=True)  # Cache edited data while allowing updates
 def edit_row(index, original_df):
     """
@@ -40,7 +40,7 @@ def edit_row(index, original_df):
         return updated_df
     else:
         return None
-
+'''
 # Streamlit app
 def main():
 
