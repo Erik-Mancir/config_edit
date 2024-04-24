@@ -81,7 +81,7 @@ def main():
     
     # Adding new value to the table
     with tabs[1]:
-        st.title("Config Table Form")
+        st.title("Form for Adding new values")
 
         tables_form = get_tables()
         # Let user select a table
@@ -102,9 +102,6 @@ def main():
         sequence_value = cursor.fetchone()[0]
 
         cursor.close()
-        
-        
-        
         
         form = st.form(key="data_form")
 
