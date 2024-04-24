@@ -90,6 +90,9 @@ def main():
         cursor = cnx.cursor()
         cursor.execute(f"SELECT * FROM {selected_table_form}")
         data = cursor.fetchall()
+        
+        df = pd.DataFrame(data, columns=[desc[0] for desc in cursor.description])
+        st.dataframe(df)
 
         cursor = cnx.cursor()
 
@@ -101,8 +104,7 @@ def main():
         #cursor.close()
         
         
-        df = pd.DataFrame(data, columns=[desc[0] for desc in cursor.description])
-        st.dataframe(df)
+        
         '''
         form = st.form(key="data_form")
 
