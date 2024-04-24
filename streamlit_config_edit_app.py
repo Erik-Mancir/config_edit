@@ -136,7 +136,7 @@ def main():
                 #cursor.execute(sql, values)
                 cursor.execute("""
                     INSERT INTO config_t1 (CONFIG_ID, ACCOUNT_NAME, role, SETTINGS)
-                    VALUES (%s, %s, %s, %s)
+                    VALUES (?, ?, ?, ?)
                 """, (sequence_value,name,role,settings))
                 cnx.commit()
                 st.success("Data inserted successfully!")
