@@ -124,15 +124,20 @@ def main():
 
             # Create cursor and build SQL INSERT statement
             cursor = cnx.cursor()
-            sql = f"""
-                INSERT INTO config_t1 (CONFIG_ID, ACCOUNT_NAME, role, SETTINGS)
-                VALUES (%s, %s, %s, %s)
-            """
-            values = tuple(data.values())  # Convert data dict to tuple for insertion
+            
+            #sql = f"""
+            #    INSERT INTO config_t1 (CONFIG_ID, ACCOUNT_NAME, role, SETTINGS)
+            #    VALUES (%s, %s, %s, %s)
+            #"""
+            #values = tuple(data.values())  # Convert data dict to tuple for insertion
 
             # Execute the INSERT statement
             try:
-                cursor.execute(sql, values)
+                #cursor.execute(sql, values)
+                cursor.execute("""
+                    INSERT INTO config_t1 (CONFIG_ID, ACCOUNT_NAME, role, SETTINGS)
+                    VALUES (%s, %s, %s, %s)
+                """, (sequence_value,name,role,settings))
                 cnx.commit()
                 st.success("Data inserted successfully!")
             except Exception as e:
