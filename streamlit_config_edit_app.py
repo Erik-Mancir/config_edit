@@ -138,7 +138,7 @@ def main():
                     INSERT INTO config_t1 (CONFIG_ID, ACCOUNT_NAME, "role", SETTINGS)
                     VALUES (?, ?, ?, ?)
                 """, (sequence_value,name,role,settings))
-                cnx.commit()
+                cnx._instance.commit()
                 st.success("Data inserted successfully!")
             except Exception as e:
                 st.error(f"Error inserting data: {e}")
