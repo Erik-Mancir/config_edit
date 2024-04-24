@@ -99,10 +99,10 @@ def main():
         sequence_value = cursor.fetchone()[0]
 
         cursor.close()
-        st.dataframe(data)
         
-        #df = pd.DataFrame(data, columns=[desc[0] for desc in cursor.description])
-
+        
+        df = pd.DataFrame(data, columns=[desc[0] for desc in cursor.description])
+        st.dataframe(df)
         '''
         form = st.form(key="data_form")
 
