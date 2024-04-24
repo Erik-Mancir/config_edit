@@ -108,6 +108,7 @@ def main():
         name = form.text_input(label="Name")
         role = form.text_input(label="Role")
         settings = form.text_input(label="Account Settings")
+        notes = form.text_input(label="Notes")
         # ... Add more fields as needed based on your table columns
 
         submit_button = form.form_submit_button(label="Submit")
@@ -118,6 +119,7 @@ def main():
                 "ACCOUNT_NAME": name,
                 "role": role,
                 "SETTINGS": settings,
+                "NOTES":notes
 
                 # ... Add more key-value pairs for other columns
             }
@@ -125,24 +127,20 @@ def main():
             # Create cursor and build SQL INSERT statement
             cursor = cnx.cursor()
             
-            #sql = f"""
-            #    INSERT INTO config_t1 (CONFIG_ID, ACCOUNT_NAME, role, SETTINGS)
-            #    VALUES (%s, %s, %s, %s)
-            #"""
-            #values = tuple(data.values())  # Convert data dict to tuple for insertion
+            # Convert data dict to tuple for insertion
+            values = tuple(data.values())  
 
             # Execute the INSERT statement
             try:
                 #cursor.execute(sql, values)
                 cursor.execute("""
-                    INSERT INTO config_t1 (CONFIG_ID, ACCOUNT_NAME, "role", SETTINGS)
+                    INSERT INTO config_t1 (CONFIG_ID, ACCOUNT_NAME, "role", SETTINGS, NOTES)
                     VALUES (?, ?, ?, ?)
-                """, (sequence_value,name,role,settings))
+                """, values)
                 cnx._instance.commit()
                 st.success("Data inserted successfully!")
             except Exception as e:
                 st.error(f"Error inserting data: {e}")
-                #cnx.rollback()  # Rollback on errors
             finally:
                 cursor.close()  # Always close the cursor
 # Run the Streamlit app
