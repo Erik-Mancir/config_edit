@@ -92,7 +92,7 @@ def main():
         data = cursor.fetchall()
 
         df = pd.DataFrame(data, columns=[desc[0] for desc in cursor.description])
-        st.dataframe(df)
+        st.dataframe(df, use_container_width=True)
 
         cursor = cnx.cursor()
 
