@@ -55,7 +55,7 @@ def main():
                     #time.sleep(5)
                 except:
                     st.warning("Error updating table")
-        cursor.close()
+            cursor.close()
         
     
     # Adding new value to the table
@@ -126,7 +126,7 @@ def main():
                     cursor.close()
                 finally:
                     cursor.close()  # Always close the cursor
-        cursor.close()        
+                cursor.close()        
     #cnx.session().close() 
 # Run the Streamlit app
 #if __name__ == "__main__":
