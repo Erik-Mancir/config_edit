@@ -12,6 +12,7 @@ def get_tables():
     cursor = cnx.cursor()
     cursor.execute("SHOW TABLES")
     tables = [table[1] for table in cursor.fetchall()]
+    cursor.close()
     return tables
 
 # Streamlit app
@@ -32,6 +33,7 @@ def main():
         cursor = cnx.cursor()
         cursor.execute(f"SELECT * FROM {selected_table}")
         data = cursor.fetchall()
+        cursor.close()
         #st.dataframe(data)
         df = pd.DataFrame(data, columns=[desc[0] for desc in cursor.description])
         
