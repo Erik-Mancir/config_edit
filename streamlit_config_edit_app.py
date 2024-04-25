@@ -28,7 +28,7 @@ def main():
         tables = get_tables()
         
         # Let user select a table
-        selected_table = st.selectbox("Select a table", tables, key="Select_for_Data_Editor")
+        selected_table = st.selectbox("Select a table", tables, key="Select_for_Data_Editor", index=None)
         
         # Fetch data from selected table
         cursor = cnx.cursor()
@@ -63,7 +63,7 @@ def main():
 
         tables_form = get_tables()
         # Let user select a table
-        selected_table_form = st.selectbox("Select a table", tables_form, key="Select_for_Form")
+        selected_table_form = st.selectbox("Select a table", tables_form, key="Select_for_Form",index=None)
         # Fetch data from selected table
         cursor = cnx.cursor()
         cursor.execute(f"SELECT * FROM {selected_table_form}")
