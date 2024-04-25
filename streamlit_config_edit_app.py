@@ -51,6 +51,7 @@ def main():
                 #time.sleep(5)
             except:
                 st.warning("Error updating table")
+        cursor.close()
     
     # Adding new value to the table
     with tabs[1]:
