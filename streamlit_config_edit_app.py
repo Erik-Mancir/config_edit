@@ -122,7 +122,7 @@ def main():
                 cursor.close()
             finally:
                 cursor.close()  # Always close the cursor
-                
+        cursor.close()        
     #cnx.session().close() 
 # Run the Streamlit app
 if __name__ == "__main__":
