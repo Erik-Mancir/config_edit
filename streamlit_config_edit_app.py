@@ -125,5 +125,5 @@ def main():
         cursor.close()        
     #cnx.session().close() 
 # Run the Streamlit app
-if __name__ == "__main__":
-    main()
+#if __name__ == "__main__":
+main()
