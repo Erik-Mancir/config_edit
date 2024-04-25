@@ -7,7 +7,7 @@ cnx = st.connection("snowflake")
 session = cnx.session()
 
 # Function to fetch tables from Snowflake
-@st.cache(allow_output_mutation=True)
+#@st.cache(allow_output_mutation=True)
 def get_tables():
     cursor = cnx.cursor()
     cursor.execute("SHOW TABLES")
@@ -126,5 +126,5 @@ def main():
                 finally:
                     cursor.close()  # Always close the cursor
                 cursor.close()
-                        
-main()
+if __name__ == '__main__':                        
+    main()
