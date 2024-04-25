@@ -119,6 +119,7 @@ def main():
                 st.success("Data inserted successfully!")
             except Exception as e:
                 st.error(f"Error inserting data: {e}")
+                cursor.close()
             finally:
                 cursor.close()  # Always close the cursor
                 cnx.session().close
