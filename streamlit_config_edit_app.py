@@ -1,7 +1,6 @@
 # Import python packages
 import streamlit as st
 from snowflake.snowpark.functions import col
-import requests
 import pandas as pd
 
 cnx = st.connection("snowflake")
@@ -126,8 +125,6 @@ def main():
                     cursor.close()
                 finally:
                     cursor.close()  # Always close the cursor
-                cursor.close()        
-    #cnx.session().close() 
-# Run the Streamlit app
-#if __name__ == "__main__":
+                cursor.close()
+                        
 main()
