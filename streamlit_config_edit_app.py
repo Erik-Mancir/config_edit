@@ -54,6 +54,7 @@ def main():
             except:
                 st.warning("Error updating table")
         cursor.close()
+        cnx.session().close
     
     # Adding new value to the table
     with tabs[1]:
@@ -120,6 +121,7 @@ def main():
                 st.error(f"Error inserting data: {e}")
             finally:
                 cursor.close()  # Always close the cursor
+                cnx.session().close
             
 # Run the Streamlit app
 if __name__ == "__main__":
