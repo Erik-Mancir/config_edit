@@ -25,7 +25,7 @@ def get_streams():
 
 def get_deparments():
     cursor = cnx.cursor()
-    cursor.execute("""SELECT DEPARMENT_NAME, DEPARTMENT_ID FROM DEPARTMENTS""")
+    cursor.execute("""SELECT DEPARTMENT_NAME, DEPARTMENT_ID FROM DEPARTMENTS""")
     departments = cursor.fetchall()
     return departments
 
