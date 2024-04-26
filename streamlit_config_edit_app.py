@@ -7,7 +7,7 @@ cnx = st.connection("snowflake")
 session = cnx.session()
 
 # Function to fetch tables from Snowflake
-def get_tables():    
+def get_tables():
     cursor = cnx.cursor()
     cursor.execute("SHOW TABLES")
     tables = [table[1] for table in cursor.fetchall()]
@@ -37,6 +37,7 @@ def get_deparments():
 
 # Streamlit app
 def main():
+
     tabs = st.tabs(["Editor", "Form", "View logs"])
 
     # Editing the table using the Streamlit Data Editor
@@ -222,3 +223,4 @@ def main():
 if __name__ == '__main__':          
     main()
 
+session.close()
