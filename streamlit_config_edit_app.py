@@ -75,8 +75,8 @@ def main():
                     #time.sleep(5)
                 except:
                     st.warning("Error updating table")
-            cursor.close()
-        
+        cursor.close()
+    
     
     # Adding new value to the table
     with tabs[1]:
@@ -204,7 +204,8 @@ def main():
                     finally:
                         cursor.close()  # Always close the cursor
                     cursor.close()
-    
+        cursor.close()
+
     #CDC using SF Streams
     with tabs[2]:
         st.title("Reviewing changes made to the tables")
@@ -220,7 +221,7 @@ def main():
             cursor.close()
             df = pd.DataFrame(data,columns=[desc[0] for desc in cursor.description])
             st.dataframe(df, use_container_width=True)
-
+        cursor.close()
 
 if __name__ == '__main__':          
     main()
