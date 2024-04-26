@@ -123,7 +123,7 @@ def main():
                 role = form.text_input(label="Role")
                 settings = form.text_input(label="Settings")
                 notes = form.text_input(label="Notes")
-                department = form.selectbox(label="Select the department",options=list(department_options.keys()))
+                department = form.selectbox(label="Select the department",options=list(department_options.values()))
                 # ... Add more fields as needed based on your table columns
 
                 submit_button = form.form_submit_button(label="Submit")
