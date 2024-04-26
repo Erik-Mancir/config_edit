@@ -105,7 +105,7 @@ def main():
                 role = form.text_input(label="Role")
                 settings = form.text_input(label="Settings")
                 notes = form.text_input(label="Notes")
-                department = form.select_slider(label="Select the department",options=list(department_options.keys()))
+                department = form.selectbox(label="Select the department",options=list(department_options.keys()))
                 # ... Add more fields as needed based on your table columns
 
                 submit_button = form.form_submit_button(label="Submit")
@@ -159,7 +159,7 @@ def main():
 
                 # Form fields using appropriate Streamlit widgets (e.g., text_input, number_input)
                 department_name = form.text_input(label="Department Name")
-                employees_count = form.number_input(label="Count of Employees")
+                employees_count = form.slider(label="Count of Employees", min_value=1, max_value=40)
                 # ... Add more fields as needed based on your table columns
 
                 submit_button = form.form_submit_button(label="Submit")
