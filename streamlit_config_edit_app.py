@@ -23,6 +23,12 @@ def get_streams():
     cursor.close()
     return streams
 
+def get_deparments():
+    cursor = cnx.cursor()
+    cursor.execute("""SELECT DEPARMENT_NAME, DEPARTMENT_ID FROM DEPARTMENTS""")
+    departments = cursor.fetchall()
+    return departments
+
 # Streamlit app
 def main():
 
@@ -96,11 +102,14 @@ def main():
                 form = st.form(key="data_form_employees")
 
                 # Form fields using appropriate Streamlit widgets (e.g., text_input, number_input)
-                department_options = {
-                    "Marketing":1, 
-                    "IT - BI": 101, 
-                    "IT - DI": 102
-                    }
+                #department_options = {
+                #    "Marketing":1, 
+                #    "IT - BI": 101, 
+                #    "IT - DI": 102
+                #    }
+
+                #Get the departments from SF table
+                department_options = get_deparments()
                 name = form.text_input(label="Name")
                 role = form.text_input(label="Role")
                 settings = form.text_input(label="Settings")
