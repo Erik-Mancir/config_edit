@@ -26,7 +26,7 @@ def get_streams():
 def get_deparments():
     cursor = cnx.cursor()
     cursor.execute("""SELECT DEPARTMENT_NAME, DEPARTMENT_ID FROM DEPARTMENTS""")
-    departments = cursor.fetchall()
+    departments = cursor.fetchall().__dict__
     return departments
 
 # Streamlit app
