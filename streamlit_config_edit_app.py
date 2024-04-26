@@ -27,8 +27,16 @@ def get_deparments():
     cursor = cnx.cursor()
     cursor.execute("SELECT DEPARTMENT_NAME, DEPARTMENT_ID FROM DEPARTMENTS")
     departments_list = cursor.fetchall()
-    departments = {name: str(id) for name, id in departments_list}
-    return departments
+    department_dict = {}
+
+    # Loop through fetched data and populate the dictionary
+    for row in departments_list:
+        department_name = row[0]  # Access department name from the first column
+        department_id = row[1]  # Access department ID from the second column
+        department_dict[department_name] = department_id
+
+    cursor.close()
+    return department_dict
 
 # Streamlit app
 def main():
