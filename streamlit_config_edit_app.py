@@ -7,7 +7,6 @@ cnx = st.connection("snowflake")
 session = cnx.session()
 
 # Function to fetch tables from Snowflake
-#@st.cache(allow_output_mutation=True)
 def get_tables():
     cursor = cnx.cursor()
     cursor.execute("SHOW TABLES")
