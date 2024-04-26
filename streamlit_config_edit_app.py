@@ -218,7 +218,6 @@ def main():
             cursor.close()
             df = pd.DataFrame(data,columns=[desc[0] for desc in cursor.description])
             st.dataframe(df, use_container_width=True)
-        cursor.close()
 
 if __name__ == '__main__':          
     main()
