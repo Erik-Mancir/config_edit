@@ -28,13 +28,11 @@ def get_deparments():
     cursor.execute("SELECT DEPARTMENT_NAME, DEPARTMENT_ID FROM DEPARTMENTS")
     departments_list = cursor.fetchall()
     department_dict = {}
-
     # Loop through fetched data and populate the dictionary
     for row in departments_list:
         department_name = row[0]  # Access department name from the first column
         department_id = row[1]  # Access department ID from the second column
         department_dict[department_name] = department_id
-
     cursor.close()
     return department_dict
 
@@ -109,13 +107,6 @@ def main():
                 cursor.close()
                 
                 form = st.form(key="data_form_employees")
-
-                # Form fields using appropriate Streamlit widgets (e.g., text_input, number_input)
-                #department_options = {
-                #    "Marketing":1, 
-                #    "IT - BI": 101, 
-                #    "IT - DI": 102
-                #    }
 
                 #Get the departments from SF table
                 department_options = get_deparments()
