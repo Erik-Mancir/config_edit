@@ -81,66 +81,125 @@ def main():
 
             df = pd.DataFrame(data, columns=[desc[0] for desc in cursor.description])
             st.dataframe(df, use_container_width=True)
-
-            cursor = cnx.cursor()
-
-            # Replace "your_schema" and "your_sequence" with your actual names
-            sql = f"SELECT config.config_t_sequence.nextval"
-            cursor.execute(sql)
-            sequence_value = cursor.fetchone()[0]
-
-            cursor.close()
             
-            form = st.form(key="data_form")
+            #FORM FOR EMPLOYEES
+            if selected_table_form == 'EMPLOYEES':
 
-            # Form fields using appropriate Streamlit widgets (e.g., text_input, number_input)
-            name = form.text_input(label="Name")
-            role = form.text_input(label="Role")
-            settings = form.text_input(label="Account Settings")
-            notes = form.text_input(label="Notes")
-            # ... Add more fields as needed based on your table columns
-
-            submit_button = form.form_submit_button(label="Submit")
-            if submit_button:
-                # Prepare data for insertion
-                data_tuple = {
-                    "CONFIG_ID":sequence_value,
-                    "ACCOUNT_NAME": name,
-                    "role": role,
-                    "SETTINGS": settings,
-                    "NOTES":notes
-
-                    # ... Add more key-value pairs for other columns
-                }
-
-                # Create cursor and build SQL INSERT statement
                 cursor = cnx.cursor()
-                
-                # Convert data dict to tuple for insertion
-                values = tuple(data_tuple.values())  
+                # Replace "your_schema" and "your_sequence" with your actual names
+                sql = f"SELECT config.config_t_sequence.nextval"
+                cursor.execute(sql)
+                sequence_value = cursor.fetchone()[0]
 
-                # Execute the INSERT statement
-                try:
-                    #cursor.execute(sql, values)
-                    cursor.execute("""
-                        INSERT INTO config_t1 (CONFIG_ID, ACCOUNT_NAME, "role", SETTINGS, NOTES)
-                        VALUES (?, ?, ?, ?, ?)
-                    """, values)
-                    cnx._instance.commit()
-                    st.success("Data inserted successfully!")
-                except Exception as e:
-                    st.error(f"Error inserting data: {e}")
-                    cursor.close()
-                finally:
-                    cursor.close()  # Always close the cursor
                 cursor.close()
+                
+                form = st.form(key="data_form_employees")
+
+                # Form fields using appropriate Streamlit widgets (e.g., text_input, number_input)
+                department_options = {
+                    "Marketing":1, 
+                    "IT - BI": 101, 
+                    "IT - DI": 102
+                    }
+                name = form.text_input(label="Name")
+                role = form.text_input(label="Role")
+                settings = form.text_input(label="Settings")
+                notes = form.text_input(label="Notes")
+                department = form.select_slider(label="Select the department",options=list(department_options.keys()))
+                # ... Add more fields as needed based on your table columns
+
+                submit_button = form.form_submit_button(label="Submit")
+                if submit_button:
+                    # Prepare data for insertion
+                    data_tuple = {
+                        "EMPLOYEE_ID":sequence_value,
+                        "ACCOUNT_NAME": name,
+                        "role": role,
+                        "SETTINGS": settings,
+                        "NOTES":notes,
+                        "DEPARTMENT_ID1":department
+
+                        # ... Add more key-value pairs for other columns
+                    }
+
+                    # Create cursor and build SQL INSERT statement
+                    cursor = cnx.cursor()
+                    
+                    # Convert data dict to tuple for insertion
+                    values = tuple(data_tuple.values())  
+
+                    # Execute the INSERT statement
+                    try:
+                        #cursor.execute(sql, values)
+                        cursor.execute("""
+                            INSERT INTO EMPLOYEES (EMPLOYEE_ID, ACCOUNT_NAME, "role", SETTINGS, NOTES, DEPARTMENT_ID1)
+                            VALUES (?, ?, ?, ?, ?, ?)
+                        """, values)
+                        cnx._instance.commit()
+                        st.success("Data inserted successfully!")
+                    except Exception as e:
+                        st.error(f"Error inserting data: {e}")
+                        cursor.close()
+                    finally:
+                        cursor.close()  # Always close the cursor
+                    cursor.close()
+
+            #Form for DEPARTMENTS
+            if selected_table_form == 'DEPARTMENTS':
+
+                cursor = cnx.cursor()
+                # Replace "your_schema" and "your_sequence" with your actual names
+                sql = f"SELECT config.SEQ_DEPARTMENTS.nextval"
+                cursor.execute(sql)
+                sequence_value = cursor.fetchone()[0]
+
+                cursor.close()
+                
+                form = st.form(key="data_form_departments")
+
+                # Form fields using appropriate Streamlit widgets (e.g., text_input, number_input)
+                department_name = form.text_input(label="Department Name")
+                employees_count = form.number_input(label="Count of Employees")
+                # ... Add more fields as needed based on your table columns
+
+                submit_button = form.form_submit_button(label="Submit")
+                if submit_button:
+                    # Prepare data for insertion
+                    data_tuple = {
+                        "DEPARTMENT_ID":sequence_value,
+                        "DEPARTMENT_NAME": name,
+                        "EMPLOYEES_COUNT": employees_count
+                        # ... Add more key-value pairs for other columns
+                    }
+
+                    # Create cursor and build SQL INSERT statement
+                    cursor = cnx.cursor()
+                    
+                    # Convert data dict to tuple for insertion
+                    values = tuple(data_tuple.values())  
+
+                    # Execute the INSERT statement
+                    try:
+                        #cursor.execute(sql, values)
+                        cursor.execute("""
+                            INSERT INTO DEPARTMENTS (DEPARTMENT_ID, DEPARTMENT_NAME, EMPLOYEES_COUNT)
+                            VALUES (?, ?, ?)
+                        """, values)
+                        cnx._instance.commit()
+                        st.success("Data inserted successfully!")
+                    except Exception as e:
+                        st.error(f"Error inserting data: {e}")
+                        cursor.close()
+                    finally:
+                        cursor.close()  # Always close the cursor
+                    cursor.close()
     
     with tabs[2]:
         st.title("Reviewing changes made to the tables")
 
         tables = get_streams()
 
-        selected_table = st.selectbox("Select the CDC table",tables, key="selector_cdc_table", index=None)
+        selected_table = st.selectbox("Select the CDC stream",tables, key="selector_cdc_table", index=None)
 
         if selected_table != None:
             cursor = cnx.cursor()
