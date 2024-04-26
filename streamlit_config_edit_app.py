@@ -3,6 +3,8 @@ import streamlit as st
 from snowflake.snowpark.functions import col
 import pandas as pd
 
+cnx = st.connection("snowflake")
+session = cnx.session()
 
 # Function to fetch tables from Snowflake
 def get_tables():
@@ -48,11 +50,11 @@ def get_deparments():
     session.close()
     return department_dict
 
+session.close()
 # Streamlit app
 def main():
     tabs = st.tabs(["Editor", "Form", "View logs"])
-    cnx = st.connection("snowflake")
-    session = cnx.session()
+
     # Editing the table using the Streamlit Data Editor
     with tabs[0]:
         st.title("Config Table Editor")
@@ -232,6 +234,6 @@ def main():
             cursor.close()
             df = pd.DataFrame(data,columns=[desc[0] for desc in cursor.description])
             st.dataframe(df, use_container_width=True)
-    session.close()
+            
 if __name__ == '__main__':          
     main()
