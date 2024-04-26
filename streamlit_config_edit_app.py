@@ -205,6 +205,7 @@ def main():
                         cursor.close()  # Always close the cursor
                     cursor.close()
     
+    #CDC using SF Streams
     with tabs[2]:
         st.title("Reviewing changes made to the tables")
 
