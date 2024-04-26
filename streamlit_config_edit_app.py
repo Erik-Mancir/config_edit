@@ -126,5 +126,21 @@ def main():
                 finally:
                     cursor.close()  # Always close the cursor
                 cursor.close()
+    
+    with tabs[2]:
+        st.title("Reviewing changes made to the tables")
+
+        tables = get_tables()
+
+        selected_table = st.selectbox("Select the CDC table",tables, key="selector_cdc_table", index=None)
+
+        if selected_table != None:
+            cursor = cnx.cursor()
+            cursor.execute(f"""SELECT * FROM {selected_table}""")
+            data = cursor.fetchall()
+            cursor.close()
+            df = pd.DataFrame(data,columns=[desc[0] for desc in cursor.description])
+
+
 if __name__ == '__main__':                        
     main()
