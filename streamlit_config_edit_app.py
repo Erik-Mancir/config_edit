@@ -167,7 +167,7 @@ def main():
                     # Prepare data for insertion
                     data_tuple = {
                         "DEPARTMENT_ID":sequence_value,
-                        "DEPARTMENT_NAME": name,
+                        "DEPARTMENT_NAME": department_name,
                         "EMPLOYEES_COUNT": employees_count
                         # ... Add more key-value pairs for other columns
                     }
