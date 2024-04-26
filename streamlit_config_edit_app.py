@@ -123,7 +123,9 @@ def main():
                 role = form.text_input(label="Role")
                 settings = form.text_input(label="Settings")
                 notes = form.text_input(label="Notes")
-                department = form.selectbox(label="Select the department",options=list(department_options.values()))
+                department = form.selectbox(label="Select the department",options=list(department_options.keys()))
+                #We need to take the ID from the Departments dictinary
+                selected_department_id = department_options[department]
                 # ... Add more fields as needed based on your table columns
 
                 submit_button = form.form_submit_button(label="Submit")
@@ -135,7 +137,7 @@ def main():
                         "role": role,
                         "SETTINGS": settings,
                         "NOTES":notes,
-                        "DEPARTMENT_ID1":department
+                        "DEPARTMENT_ID1":selected_department_id
 
                         # ... Add more key-value pairs for other columns
                     }
