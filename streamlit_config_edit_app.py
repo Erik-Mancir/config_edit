@@ -7,6 +7,7 @@ cnx = st.connection("snowflake")
 session = cnx.session()
 
 # Function to fetch tables from Snowflake
+#@st.cache(allow_output_mutation=True)
 def get_tables():
     cursor = cnx.cursor()
     cursor.execute("SHOW TABLES")
@@ -74,7 +75,7 @@ def main():
                     #time.sleep(5)
                 except:
                     st.warning("Error updating table")
-            #cursor.close()
+            cursor.close()
     
     # Adding new value to the table
     with tabs[1]:
@@ -89,7 +90,6 @@ def main():
             cursor = cnx.cursor()
             cursor.execute(f"SELECT * FROM {selected_table_form}")
             data = cursor.fetchall()
-            cursor.close()
 
             df = pd.DataFrame(data, columns=[desc[0] for desc in cursor.description])
             st.dataframe(df, use_container_width=True)
@@ -147,7 +147,6 @@ def main():
                         """, values)
                         cnx._instance.commit()
                         st.success("Data inserted successfully!")
-                        cursor.close()
                     except Exception as e:
                         st.error(f"Error inserting data: {e}")
                         cursor.close()
@@ -197,12 +196,12 @@ def main():
                         """, values)
                         cnx._instance.commit()
                         st.success("Data inserted successfully!")
-                        cursor.close()
                     except Exception as e:
                         st.error(f"Error inserting data: {e}")
                         cursor.close()
                     finally:
                         cursor.close()  # Always close the cursor
+                    cursor.close()
 
     #CDC using SF Streams
     with tabs[2]:
@@ -222,5 +221,3 @@ def main():
 
 if __name__ == '__main__':          
     main()
-
-session.close()
