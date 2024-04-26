@@ -140,6 +140,7 @@ def main():
             data = cursor.fetchall()
             cursor.close()
             df = pd.DataFrame(data,columns=[desc[0] for desc in cursor.description])
+            st.dataframe(df, use_container_width=True)
 
 
 if __name__ == '__main__':          
