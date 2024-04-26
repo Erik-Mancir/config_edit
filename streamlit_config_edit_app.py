@@ -75,8 +75,7 @@ def main():
                     #time.sleep(5)
                 except:
                     st.warning("Error updating table")
-        cursor.close()
-    
+            cursor.close()
     
     # Adding new value to the table
     with tabs[1]:
@@ -153,7 +152,6 @@ def main():
                         cursor.close()
                     finally:
                         cursor.close()  # Always close the cursor
-                    cursor.close()
 
             #Form for DEPARTMENTS
             if selected_table_form == 'DEPARTMENTS':
@@ -204,7 +202,6 @@ def main():
                     finally:
                         cursor.close()  # Always close the cursor
                     cursor.close()
-        cursor.close()
 
     #CDC using SF Streams
     with tabs[2]:
