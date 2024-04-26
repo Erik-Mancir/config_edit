@@ -15,6 +15,14 @@ def get_tables():
     cursor.close()
     return tables
 
+# Function to fetch streams from Snowflake
+def get_streams():
+    cursor = cnx.cursor()
+    cursor.execute("SHOW STREAMS")
+    streams = [stream[1] for stream in cursor.fetchall()]
+    cursor.close()
+    return streams
+
 # Streamlit app
 def main():
 
@@ -130,7 +138,7 @@ def main():
     with tabs[2]:
         st.title("Reviewing changes made to the tables")
 
-        tables = get_tables()
+        tables = get_streams()
 
         selected_table = st.selectbox("Select the CDC table",tables, key="selector_cdc_table", index=None)
 
