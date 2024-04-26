@@ -7,35 +7,22 @@ cnx = st.connection("snowflake")
 session = cnx.session()
 
 # Function to fetch tables from Snowflake
-def get_tables():
-    cnx = st.connection("snowflake")
-    session = cnx.session()
-    
+def get_tables():    
     cursor = cnx.cursor()
     cursor.execute("SHOW TABLES")
     tables = [table[1] for table in cursor.fetchall()]
     cursor.close()
-    
-    session.close()
     return tables
 
 # Function to fetch streams from Snowflake
 def get_streams():
-    cnx = st.connection("snowflake")
-    session = cnx.session()
-    
     cursor = cnx.cursor()
     cursor.execute("SHOW STREAMS")
     streams = [stream[1] for stream in cursor.fetchall()]
     cursor.close()
-    
-    session.close()
     return streams
 
 def get_deparments():
-    cnx = st.connection("snowflake")
-    session = cnx.session()
-
     cursor = cnx.cursor()
     cursor.execute("SELECT DEPARTMENT_NAME, DEPARTMENT_ID FROM DEPARTMENTS")
     departments_list = cursor.fetchall()
@@ -46,8 +33,6 @@ def get_deparments():
         department_id = row[1]  # Access department ID from the second column
         department_dict[department_name] = department_id
     cursor.close()
-
-    session.close()
     return department_dict
 
 # Streamlit app
