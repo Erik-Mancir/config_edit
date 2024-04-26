@@ -142,5 +142,5 @@ def main():
             df = pd.DataFrame(data,columns=[desc[0] for desc in cursor.description])
 
 
-if __name__ == '__main__':                        
+if __name__ == '__main__':          
     main()
