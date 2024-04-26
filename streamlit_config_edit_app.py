@@ -50,7 +50,6 @@ def get_deparments():
     session.close()
     return department_dict
 
-session.close()
 # Streamlit app
 def main():
     tabs = st.tabs(["Editor", "Form", "View logs"])
@@ -234,6 +233,6 @@ def main():
             cursor.close()
             df = pd.DataFrame(data,columns=[desc[0] for desc in cursor.description])
             st.dataframe(df, use_container_width=True)
-            
+
 if __name__ == '__main__':          
     main()
