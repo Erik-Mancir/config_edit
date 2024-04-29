@@ -43,7 +43,7 @@ def main():
 
     # Editing the table using the Streamlit Data Editor
     with tabs[0]:
-        st.title("Config Table Editor")
+        st.title("Data Editor for Tables")
         # Fetch tables from Snowflake
         tables = get_tables()
         
