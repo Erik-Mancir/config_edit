@@ -1,0 +1,54 @@
+
+
+create or replace sequence seq_departments start with 1 increment by 1 noorder;
+create or replace sequence CONFIG_T_SEQUENCE start with 1 increment by 1 noorder;
+
+--CREATE TABLE DEPARTMENTS;
+
+create or replace TABLE POSTGRE_DB.CONFIG.DEPARTMENTS (
+	DEPARTMENT_ID NUMBER(38,0) NOT NULL DEFAULT POSTGRE_DB.CONFIG.seq_departments.NEXTVAL,
+	DEPARTMENT_NAME VARCHAR(30),
+	EMPLOYEES_COUNT INTEGER,
+	constraint DEPARTMENT_ID unique (DEPARTMENT_ID)
+);
+
+
+create or replace TABLE POSTGRE_DB.CONFIG.EMPLOYEES (
+	EMPLOYEE_ID NUMBER(38,0) NOT NULL DEFAULT POSTGRE_DB.CONFIG.CONFIG_T_SEQUENCE.NEXTVAL,
+	ACCOUNT_NAME VARCHAR(30),
+	"role" VARCHAR(30),
+	SETTINGS VARCHAR(20),
+	NOTES VARCHAR(40),
+    DEPARTMENT_ID1 NUMBER(38,0),
+	constraint EMPLOYEE_ID unique (EMPLOYEE_ID),
+    CONSTRAINT fk_department_id FOREIGN KEY (DEPARTMENT_ID1)
+        REFERENCES POSTGRE_DB.CONFIG.DEPARTMENTS(DEPARTMENT_ID)
+);
+
+INSERT INTO DEPARTMENTS (DEPARTMENT_NAME, EMPLOYEES_COUNT)
+values 
+('IT - BI', '5'),
+('IT - DI', '3');
+
+select * from departments;
+
+INSERT INTO EMPLOYEES (ACCOUNT_NAME, "role", SETTINGS, NOTES, DEPARTMENT_ID1)
+values                                                                                   
+('name1', 'Data Analyst', 'Default', '', 101),
+('name2', 'Data Engineer', 'Default', '', 102);
+
+
+CREATE OR REPLACE STREAM employee_check ON TABLE EMPLOYEES;
+
+CREATE OR REPLACE STREAM departments_check ON TABLE DEPARTMENTS;
+
+select * from departments;
+update departments set employees_count = 1 where department_id = 101;
+
+select * from departments_check;
+
+show STREAMS;
+
+show TABLES;
+
+
